@@ -1,0 +1,248 @@
+---
+title: "Mini Data-Analysis Deliverable 1"
+author: "Icíar Fernández Boyano"
+date: "18/09/2020"
+output: md_document
+---
+
+# Welcome to your (maybe) first-ever data analysis project!
+
+And hopefully the first of many. Let's get started:
+
+1. Install the [`datateachr`](https://github.com/UBC-MDS/datateachr) package by typing the following into your **R terminal**:
+
+```{r}
+# install.packages("devtools")
+# devtools::install_github("UBC-MDS/datateachr")
+```
+
+2. Load the package below. While we are at it, let's load the tidyverse too.
+
+```{r}
+library(datateachr)
+library(tidyverse)
+```
+
+# Instructions
+
+The instructions and grading scheme for Milestone 1 can be found in detail [here](). Briefly,
+
++ Each milestone is worth 30 points. The number of points allocated to each task will be annotated within each deliverable. Tasks that are more challenging will often be allocated more points.
+
++ 10 points will be allocated to the reproducibility, cleanliness, and coherence of the analysis. While the three milestones will be submitted as independent deliverables, the analysis itself is a continuum - think of it as 3 chapters to a story. Each chapter, or in this case, portion of your analysis, should be easily followed through by someone unfamiliar with the content. [Here](https://swcarpentry.github.io/r-novice-inflammation/06-best-practices-R/) is a good resource for what constitutes "good code". Learning good coding practices early in your career will save you hassle later on!
+
+# Learning Objectives
+
+By the end of this milestone, you should:
+
++ Become familiar with your dataset of choosing
++ Think of 4 questions that you would like to answer with your data
++ Generate a reproducible and clear report using R Markdown
+
+# Task 1: Choose your favorite dataset (10 points)
+
+The `datateachr` package by Hayley Boyce and Jordan Bourak currently composed of 7 semi-tidy datasets for educational purposes. Here is a brief description of each dataset:
+
++ *apt_buildings*: Acquired courtesy of The City of Toronto’s Open Data Portal. It currently has 3455 rows and 37 columns.
+
++ *building_permits*: Acquired courtesy of The City of Vancouver’s Open Data Portal. It currently has 20680 rows and 14 columns.
+
++ *cancer_sample*: Acquired courtesy of UCI Machine Learning Repository. It currently has 569 rows and 32 columns.
+
++ *flow_sample*: Acquired courtesy of The Government of Canada’s Historical Hydrometric Database. It currently has 218 rows and 7 columns.
+
++ *parking_meters*: Acquired courtesy of The City of Vancouver’s Open Data Portal. It currently has 10032 rows and 22 columns.
+
++ *steam_games*: Acquired courtesy of Kaggle. It currently has 40833 rows and 21 columns.
+
++ *vancouver_trees*: Acquired courtesy of The City of Vancouver’s Open Data Portal. It currently has 146611 rows and 20 columns.
+
+**Things to keep in mind**
+
++ We hope that this project will serve as practice for carrying our your own *independent* data analysis. Remember to comment your code, be explicit about what you are doing, and write notes in this markdown document when you feel that context is required. As you advance in the project, prompts and hints to do this will be diminished - it'll be up to you!
+
++ Before choosing a dataset, you should always keep in mind **your goal**, or in other ways, *what you wish to achieve with this data*. This mini data-analysis project focuses on *data wrangling*, *tidying*, and *visualization*. In short, it's a way for you to get your feet wet with exploring data on your own.
+
+And that is exactly the first thing that you will do!
+
+1.1 Out of the 7 datasets available in the `datateachr` package, choose **4** that appeal to you based on their description. Write your choices below:
+
+**Note**: We encourage you to use the ones in the `datateachr` package, but if you have a dataset that you'd really like to use, you can include it here. But, please check with a member of the teaching team to see whether the dataset is of appropriate complexity. Also, include a **brief** description of the dataset here to help the teaching team understand your data.
+
+1: building_permits
+2: cancer_sample
+3: steam_games
+4: vancouver_trees
+
+1.2 One way to narrowing down your selection is to *explore* the datasets. Use your knowledge of dplyr to find out at least *3* attributes about each of these datasets (an attribute is something such as number of rows, variables, class type...). The goal here is to have an idea of *what the data looks like*. 
+
+*Hint:* This is one of those times when you should think about the cleanliness of your analysis. I added a single code chunk for you, but do you want to use more than one? Would you like to write more comments outside of the code chunk?
+
+
+1. building_permits
+  + class type
+  + variable names
+  + number of rows
+```{r}
+#building_permits
+class(building_permits)
+variable.names(building_permits)
+nrow(building_permits)
+```
+2: cancer_sample
+  + class type
+  + dimension of data
+  + variable names
+```{r}
+#cancer_sample
+class(cancer_sample)
+dim(cancer_sample)
+variable.names(cancer_sample)
+```
+3. steam_games
+  + class type
+  + dimension of data
+  + variable names
+```{r}
+#steam_games
+class(steam_games)
+dim(steam_games)
+variable.names(steam_games)
+```
+4. vancouver_trees
+  + class type
+  + dimension of data
+  + variable names
+```{r}
+#vancouver_trees
+class(vancouver_trees)
+dim(vancouver_trees)
+variable.names(vancouver_trees)
+```
+
+1.3 Now that you've explored the 4 datasets that you were initially most interested in, let's narrow it down to 2. What lead you to choose these 2? Briefly explain your choices below, and feel free to include any code in your explanation. 
+
+I printed the first several lines of each data to have a further exploration of them.
+
+```{r}
+head(building_permits)
+head(cancer_sample)
+head(steam_games)
+head(vancouver_trees)
+```
+By looking at several lines of each data, I decide that I am not going to use the *building_permits* dataset. I found that many columns (such as _project_description_ , _building_contractor_ ...) include lots of **NA** data,which means this data is missing some details for whatever reasons. It might lead to incorrect results when I explore the dataset.
+Also I will abandon the *vancouver_trees* dataset, because I don't have any background knowledge about botany. Some variables in this dataset, including _root_barrier_ , _diameter_ , _height_range_id_, are highly related to their botanical characteristics. I prefer choosing a dataset within the fields of my knowledge.
+
+
+1.4 Time for the final decision! Going back to the beginning, it's important to have an *end goal* in mind. For example, if I had chosen the `titanic` dataset for my project, I might've wanted to explore the relationship between survival and other variables. Try to think of 1 research question that you would want to answer with each dataset. Note them down below, and make your final choice based on what seems more interesting to you!
+
+I want to choose the *steam_games* dataset for my project. I 'd like to explore the relationship between reviews and other variables, for example to find out games from which developers and publishers have the highest ratio of positive reviews.
+
+# Important note
+
+Read Tasks 2 and 3 *fully* before starting to complete either of them. Probably also a good point to grab a coffee to get ready for the fun part!
+
+This project is semi-guided, but meant to be *independent*. For this reason, you will complete tasks 2 and 3 below (under the **START HERE** mark) as if you were writing your own exploratory data analysis report, and this guidance never existed! Feel free to add a brief introduction section to your project, format the document with markdown syntax as you deem appropriate, and structure the analysis as you deem appropriate. Remember, marks will be awarded for completion of the 4 tasks, but 10 points of the whole project are allocated to a reproducible and clean analysis. If you feel lost, you can find an example [here](link example).
+
+# Task 2: Exploring your dataset (15 points)
+
+If we rewind and go back to the learning objectives, you'll see that by the end of this deliverable, you should have formulated *4* research questions about your data that you may want to answer during your project. However, it may be handy to do some more exploration on your dataset of choice before creating these questions - by looking at the data, you may get more ideas. **Before you start this task, read all instructions carefully until you reach START HERE**.
+
+2.1 Complete *4 out of the following 8 exercises* to dive deeper into your data. All datasets are different and therefore, not all of these tasks may make sense for your data - which is why you should only answer *5*. Use *dplyr* and *ggplot*.
+
+1. Plot the distribution of a numeric variable.
+2. Create a new variable based on other variables in your data (only if it makes sense)
+3. Investigate how many missing values there are per variable. Can you find a way to plot this?
+4. Explore the relationship between 2 variables in a plot.
+5. Filter observations in your data according to your own criteria. Think of what you'd like to explore - again, if this was the `titanic` dataset, I may want to narrow my search down to passengers born in a particular year...
+6. Use a boxplot to look at the frequency of different observations within a single variable. You can do this for more than one variable if you wish!
+7. Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.
+8. Use a density plot to explore any of your variables (that are suitable for this type of plot).
+
+2.2 For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
+
+# Task 3: Write your research questions (5 points)
+
+So far, you have chosen a dataset and gotten familiar with it through exploring the data. Now it's time to figure out 4 research questions that you would like to answer with your data! Write the 4 questions and any additional comments at the end of this deliverable. These questions are not necessarily set in stone - TAs will review them and give you feedback; therefore, you may choose to pursue them as they are for the rest of the project, or make modifications!
+
+<!--- *****START HERE***** --->
+```{r}
+library(tidyverse)
+```
+I will answer q7, q5, q1 and q2 below (in this order for cleanliness and coherence):
+
+
++ q7. Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.
+ 
+ I will make a subset of the dataset which are not missing "resent_reviews" or "all_reviews". Since I am going to explore the relationship between reviews and the other variables, a game without given reviews is useless, so I will remove those rows.
+```{r}
+# remove all lines that is "NA" in recent_reviews
+useful_subset <- filter(steam_games, !is.na(recent_reviews))
+# remove all lines that is "NA" in all_reviews
+useful_subset <- filter(useful_subset, !is.na(all_reviews))
+useful_subset
+```
+
++ q5. Filter observations in your data according to your own criteria. 
+
+I will filter all games with "very positive reviews" in all_reviews. I am curious about the common features among positive-reviewed games, so I need to filter these games into a subset first for further exploration.
+
+```{r}
+# Filter all rows which contain "very positive reviews" in column of "all_reviews"
+# "grepl" is the Pattern Matching And Replacement function developed  "R-core R-core@R-project.org"
+positive_games <- filter(steam_games,str_detect(all_reviews,"Very Positive"))
+positive_games
+```
+
+ + q1. Plot the distribution of a numeric variable.
+ 
+I will implement the distribution of original_price of all games. It is interesting to know how much are the most games on Steam. With this information, we could be able to explore much more feature of this data, such as do customers expect a better game when paying a high price (relationship between price and reviews)? Or are expensive games always discounted (relationship between original_price and discount_price)?
+```{r}
+ steam_games %>%
+  ggplot() +
+  geom_area(aes(x=original_price),stat = "bin") +
+  xlim(0,150)
+```
+
+
+ +q2. Create a new variable based on other variables in your data 
+ 
+ I will create a variable named "discounted". In this column, it will show "true" if a game is discounted, otherwise show "false". With this variable, I could easily explore how many percent of games are discounted.
+```{r}
+discount<-steam_games %>% 
+    filter( !is.na(original_price)) %>% #remove games those missing price information
+    mutate(discounted=!is.na(discount_price)& discount_price<original_price)
+glimpse(discount)
+```
+
+##Task 3 answers:
++ Question1: If a game is discounted, is it more likely to be a "bad quality" game, in another word, do discounted games received more negative reviews comparing original-price games? 
+
++ Question2: Which genre became more popular in recent years?
+
++ Question3: Which genre does customers prefer? (i.e. the distribution of the number of positive reviews vs genres)
+
++ Question4: Games from which developers and publishers have the highest ratio of positive reviews?
+
+
+# Submitting your Milestone
+
+To submit a Milestone, you'll be tagging a release on your GitHub repository, and submitting a link to that release on canvas. 
+
+_How to tag a release_:
+
+1. Navigate to the main page (root) of your mini analysis GitHub repository.
+2. There should be a small link on the right-hand-side of your page that says "Create a new release". Click that.
+  - You might also be able to get to the same place by clicking on the "tags" link beside where your branches are listed. 
+3. For the tag version, put `mV.0`, where `V` is the Milestone number.
+4. Choose a release title and description (this is less important).
+5. Do __not__ check off "This is a pre-release".
+6. Click "Publish Release".
+7. Put a link to that release as a submission on the Mini Analysis Project Milestone in canvas.
+  - You won't lose marks for _not_ doing this, but it would really help us out if you do this! Thank you!
+
+_Tagging another release_:
+
+If you want to change your submission _after_ tagging a release, you can still do this if it's before the deadline. Just increase the secondary version number by one -- so, make the tag version `mV.1`, then `mV.2`, etc., where `V` is the Milestone number. 
+
+
