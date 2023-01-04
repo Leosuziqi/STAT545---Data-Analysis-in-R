@@ -8,7 +8,7 @@ This repo shows my works in STAT545, including all solutions of assignments, wor
 Solutions of all works are uploaded to GitHUb in the related folders. Readers are able to clone the repo to their local computers and run codes with R language. Detailed steps of using scale function is shown below:
 
 
-###myscale
+myscale
 =======
 
 <!-- badges: start -->
@@ -16,7 +16,7 @@ Solutions of all works are uploaded to GitHUb in the related folders. Readers ar
 
 The goal of myscale is to scale the input by log or exp algorithm.
 
-###Installation
+Installation
 ------------
 
 You can install the released version of myscale from
@@ -24,7 +24,7 @@ You can install the released version of myscale from
 
     devtools::install_github("Leosuziqi/myscale")
 
-###Example
+Example
 -------
 
 This is a basic example which shows you how to solve a common problem:
@@ -34,7 +34,7 @@ This is a basic example which shows you how to solve a common problem:
     #> [1] 2.302585
 
 
-### Brief Explanation
+##Brief Explanation
 
 I made my R packages "myscale.R" with "devtools" and "usethis". The main steps are shown below:
 
