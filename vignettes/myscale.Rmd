@@ -1,0 +1,25 @@
+---
+title: "myscale"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{myscale}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(myscale)
+```
+
+This is how myscale works:
+```{r}
+myscale(10,"log")
+myscale(list(2,4,6),"exp")
+```
